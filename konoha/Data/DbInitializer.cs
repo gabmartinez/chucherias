@@ -20,7 +20,7 @@ namespace konoha.Data
 
             var category = new Category[]
             {
-                new Category{Name="Jose Hernandez", Acronym="jos", Desciption="Un hombre solitario"}
+                new Category{Name="Shirts", Acronym="Shir", Desciption="The best in the market"}
             };
 
             foreach(Category c in category)
