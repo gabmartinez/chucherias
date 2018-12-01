@@ -11,9 +11,9 @@ namespace konoha.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly konohaContext _context;
+        private readonly DBContext _context;
 
-        public CategoriesController(konohaContext context)
+        public CategoriesController(DBContext context)
         {
             _context = context;
         }
