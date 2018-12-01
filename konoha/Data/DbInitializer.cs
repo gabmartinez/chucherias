@@ -8,7 +8,7 @@ namespace konoha.Data
 {
     public class DbInitializer
     {
-        public static void Initializer(konohaContext context){
+        public static void Initializer(DBContext context){
 
             context.Database.EnsureCreated();
 

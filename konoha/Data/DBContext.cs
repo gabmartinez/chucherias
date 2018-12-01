@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace konoha.Models
 {
-    public class konohaContext : DbContext
+    public class DBContext : DbContext
     {
-        public konohaContext (DbContextOptions<konohaContext> options)
+        public DBContext (DbContextOptions<DBContext> options)
             : base(options)
         {
         }
