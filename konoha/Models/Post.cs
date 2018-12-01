@@ -19,7 +19,9 @@ namespace konoha.Models
         public int User { get; set; }
 
         [Required(ErrorMessage = "You must enter a {0}")]
-        public int Category { get; set; }
+        public int CategoryID { get; set; }
+
+        public Category Category { get; set; }
 
         [StringLength(100, ErrorMessage = "The field {0} can contain maximun {1} and minimun {2} chracters")]
         public string Description { get; set; }
