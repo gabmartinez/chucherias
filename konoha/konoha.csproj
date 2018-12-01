@@ -14,4 +14,8 @@
   <ItemGroup>
     <Compile Remove="Models\User.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App Data\" />
+  </ItemGroup>
 </Project>

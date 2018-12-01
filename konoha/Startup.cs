@@ -64,7 +64,7 @@ namespace konoha
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
+          
             DbInitializer.Initializer(context);
         }
     }
