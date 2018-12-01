@@ -39,10 +39,13 @@ namespace konoha
 
             services.AddDbContext<DBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+
+            services.AddDbContext<PostContext>(options =>
+                  options.UseSqlServer(Configuration.GetConnectionString("DbConnectio")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DBContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DBContext context, PostContext contx)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +69,7 @@ namespace konoha
             });
           
             DbInitializer.Initializer(context);
+            PostInitializer.PostInit(contx);
         }
     }
 }
