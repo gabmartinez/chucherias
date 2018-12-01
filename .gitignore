@@ -478,3 +478,5 @@ ASALocalRun/
 
 
 .DS_Store
+appsettings.Development.json
+.vscode

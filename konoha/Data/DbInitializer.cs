@@ -17,19 +17,8 @@ namespace konoha.Data
             {
                 return;
             }
-
-            var category = new Category[]
-            {
-                new Category{Name="Shirts", Acronym="Shir", Desciption="The best in the market"}
-            };
-
-            foreach(Category c in category)
-            {
-                context.Category.Add(c);
-
-            }
-
-             context.SaveChanges();
-       }
+            context.Category.Add(new Category { Name = "Shirts", Acronym = "Shir", Desciption = "The best in the market" });
+            context.SaveChanges();
+        }
     }
 }

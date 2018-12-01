@@ -11,9 +11,9 @@ namespace konoha.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly PostContext _context;
+        private readonly DBContext _context;
 
-        public PostsController(PostContext context)
+        public PostsController(DBContext context)
         {
             _context = context;
         }
