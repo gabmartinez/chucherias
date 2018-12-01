@@ -37,14 +37,12 @@ namespace konoha
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<PostContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PostContext")));
-
-     
+            services.AddDbContext<DBContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, PostContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DBContext context)
         {
             if (env.IsDevelopment())
             {
@@ -66,8 +64,8 @@ namespace konoha
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            PostInitializer.PostInit(context);
+          
+            DbInitializer.Initializer(context);
         }
     }
 }
