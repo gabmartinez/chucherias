@@ -13,6 +13,7 @@ namespace konoha.Models
         {
         }
 
-        public DbSet<konoha.Models.Category> Category { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Post> Post { get; set; }
     }
 }
