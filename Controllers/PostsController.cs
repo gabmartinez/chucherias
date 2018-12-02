@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using konoha.Models;
 using konoha.Data;
 
+
 namespace konoha.Controllers
 {
     public class PostsController : Controller
@@ -48,6 +49,7 @@ namespace konoha.Controllers
         {
             return View();
         }
+
 
         // POST: Posts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
