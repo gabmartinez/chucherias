@@ -5,10 +5,6 @@
     <UserSecretsId>aspnet-konoha-26D0F1C0-C535-45B8-BDEE-1D73BB068089</UserSecretsId>
   </PropertyGroup>
 
-  <!-- <ItemGroup>
-    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup> -->
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
