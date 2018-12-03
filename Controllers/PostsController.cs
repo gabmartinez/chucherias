@@ -69,34 +69,11 @@ namespace konoha.Controllers
         public async Task<IActionResult> Create([Bind("PostID,Title,CategoryID,Description,IsAcctive")] Post post)
         {
             if (ModelState.IsValid)
-            {
-                // Console.WriteLine("Come on!");
+            {   
                 var files = HttpContext.Request.Form.Files;
-                post.Images = new List<PostImage>();
-                foreach (var Image in files)
-                {
-                    Console.WriteLine("Here we are!");
-                    if (Image != null && Image.Length > 0)
-                    {
-                        var file = Image;
-                        Console.WriteLine("Here we are 1");
-                        var uploads = Path.Combine(_environment.WebRootPath, "images/posts");
-                        Console.WriteLine("Here we are 2");
-                        if (file.Length > 0)
-                        {
-                            Console.WriteLine("Here we are 3");
-                            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                            System.Console.WriteLine(fileName);
-                            using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
-                            {
-                                await file.CopyToAsync(fileStream);
-                                post.Images.Add(new PostImage { ImagePath = file.FileName });
-                            }
-                        }
-                    }
+                if(files.Any()) {
+                    post.Images = await PrepareImages(files);
                 }
-                
                 post.CreatedDate = DateTime.Now;
                 post.UserID = _userManager.GetUserId(User);
                 _context.Add(post);
@@ -141,6 +118,11 @@ namespace konoha.Controllers
             {
                 try
                 {
+                    var files = HttpContext.Request.Form.Files;
+                    if(files.Any()) {
+                        post.Images = await PrepareImages(files);
+                    }
+                    
                     _context.Update(post);
                     await _context.SaveChangesAsync();
                 }
@@ -194,6 +176,34 @@ namespace konoha.Controllers
         private bool PostExists(int id)
         {
             return _context.Post.Any(e => e.PostID == id);
+        }
+
+        private async Task<List<PostImage>> PrepareImages(IFormFileCollection files) {
+            List<PostImage> images = new List<PostImage>();
+            foreach (var Image in files)
+            {
+                Console.WriteLine("Here we are!");
+                if (Image != null && Image.Length > 0)
+                {
+                    var file = Image;
+                    Console.WriteLine("Here we are 1");
+                    var uploads = Path.Combine(_environment.WebRootPath, "images/posts");
+                    Console.WriteLine("Here we are 2");
+                    if (file.Length > 0)
+                    {
+                        Console.WriteLine("Here we are 3");
+                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                        System.Console.WriteLine(fileName);
+                        using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                            images.Add(new PostImage { ImagePath = file.FileName });
+                        }
+                    }
+                }
+            }
+            return images;
         }
     }
 }
