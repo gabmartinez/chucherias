@@ -18,16 +18,11 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Category)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Category)
+            @Html.DisplayFor(model => model.Category.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -36,17 +31,11 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Publish_date)
+            @Html.DisplayNameFor(model => model.CreatedDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Publish_date)
+            @Html.DisplayFor(model => model.CreatedDate)
         </dd>
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.IsAcctive)
         </dt>
