@@ -100,7 +100,6 @@ namespace konoha.Controllers
                 
                 post.CreatedDate = DateTime.Now;
                 post.UserID = _userManager.GetUserId(User);
-                // Console.WriteLine("{0} {1} {2} {3} {4} {5} {6}", post.PostID, post.Title, post.UserID, post.CategoryID, post.Description, post.CreatedDate, post.IsAcctive);
                 _context.Add(post);
                 
                 await _context.SaveChangesAsync();

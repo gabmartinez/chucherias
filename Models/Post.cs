@@ -17,7 +17,6 @@ namespace konoha.Models
         [StringLength(45, ErrorMessage = "The field {0} can contain maximun {1} and minimun {2} chracters")]
         public String Title { get; set; }
         
-        [Required(ErrorMessage = "You must enter a {0}")]
         [StringLength(450)]
         public String UserID { get; set; }
 
