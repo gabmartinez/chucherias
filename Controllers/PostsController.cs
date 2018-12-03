@@ -123,8 +123,6 @@ namespace konoha.Controllers
             {
                 return NotFound();
             }
-
-            ViewBag.Categories = _context.Category.ToList();
             ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "Name", post.CategoryID);
             return View(post);
         }
@@ -134,7 +132,6 @@ namespace konoha.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PostID,Title,CategoryID,Description,UserID,CreatedDate,IsAcctive")] Post post)
         public async Task<IActionResult> Edit(int id, [Bind("PostID,Title,UserID,CategoryID,Description,CreatedDate,IsAcctive")] Post post)
         {
             if (id != post.PostID)
