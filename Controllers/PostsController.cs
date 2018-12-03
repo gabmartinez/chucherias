@@ -31,7 +31,8 @@ namespace konoha.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Post.ToListAsync());
+            var applicationDbContext = _context.Post.Include(p => p.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Posts/Details/5
@@ -43,6 +44,7 @@ namespace konoha.Controllers
             }
 
             var post = await _context.Post
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.PostID == id);
             if (post == null)
             {
@@ -55,7 +57,7 @@ namespace konoha.Controllers
         // GET: Posts/Create
         public IActionResult Create()
         {
-            ViewBag.Categories = _context.Category.ToList();
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "Name");
             return View();
         }
 
@@ -104,6 +106,7 @@ namespace konoha.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "Name", post.CategoryID);
             return View(post);
         }
 
@@ -122,6 +125,7 @@ namespace konoha.Controllers
             }
 
             ViewBag.Categories = _context.Category.ToList();
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "Name", post.CategoryID);
             return View(post);
         }
 
@@ -131,6 +135,7 @@ namespace konoha.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PostID,Title,CategoryID,Description,UserID,CreatedDate,IsAcctive")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("PostID,Title,UserID,CategoryID,Description,CreatedDate,IsAcctive")] Post post)
         {
             if (id != post.PostID)
             {
@@ -157,6 +162,7 @@ namespace konoha.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "Name", post.CategoryID);
             return View(post);
         }
 
@@ -169,6 +175,7 @@ namespace konoha.Controllers
             }
 
             var post = await _context.Post
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.PostID == id);
             if (post == null)
             {
