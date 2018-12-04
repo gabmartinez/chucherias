@@ -31,6 +31,10 @@ namespace konoha.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
+            Console.WriteLine(nameof(Index));
+            if(!User.Identity.IsAuthenticated) {
+                return RedirectToAction("Login", "Account");
+            }
             var applicationDbContext = _context.Post.Include(p => p.Category);
             return View(await applicationDbContext.ToListAsync());
         }
