@@ -55,12 +55,14 @@ namespace konoha.Migrations
 
                     b.Property<bool>("IsAcctive");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(12, 2)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(45);
 
                     b.Property<string>("UserID")
-                        .IsRequired()
                         .HasMaxLength(450);
 
                     b.HasKey("PostID");

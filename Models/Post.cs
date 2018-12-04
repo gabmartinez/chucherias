@@ -34,6 +34,11 @@ namespace konoha.Models
 
         [Display(Name = "Is active")]
         public bool IsAcctive { get; set; }
+
+        [DisplayFormat(DataFormatString="{0:#.####}")]
+        [Required]
+        [Column(TypeName = "decimal(12, 2)")]
+        public decimal Price { get; set; }
         
         // [MaxLength(3)]
         public List<PostImage> Images { get; set; }
