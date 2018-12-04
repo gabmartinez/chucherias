@@ -35,7 +35,7 @@ namespace konoha.Controllers
             if(!User.Identity.IsAuthenticated) {
                 return RedirectToAction("Login", "Account");
             }
-            var applicationDbContext = _context.Post.Include(p => p.Category);
+            var applicationDbContext = _context.Post.Include(p => p.Category).Include(p => p.Images);
             return View(await applicationDbContext.ToListAsync());
         }
 
