@@ -3,23 +3,22 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<ul class="nav navbar-nav navbar-right align-items-center w-100 justify-content-end">
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
-            </li>
-        </ul>
-    </form>
+    <li>
+        <a asp-action="Index" asp-controller="Posts" title="Mi Cuenta">
+            <i class="fas fa-user-circle h2 mb-0 mr-4 text-white"></i>
+        </a>
+    </li>
+    <li>
+        <a class="btn text-white" style="background: #ff5063" asp-action="Create" asp-controller="Posts" role="button">Publicar!</a>
+    </li>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    </ul>
+    <li>
+        <a class="btn btn-primary btn" asp-area="Identity" asp-page="/Account/Login">Iniciar Sección</a>
+    </li>
 }
+</ul>
