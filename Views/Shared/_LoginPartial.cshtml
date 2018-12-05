@@ -1,0 +1,24 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="nav navbar-nav navbar-right align-items-center w-100 justify-content-end">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li>
+        <a asp-action="Index" asp-controller="Posts" title="Mi Cuenta">
+            <i class="fas fa-user-circle h2 mb-0 mr-4 text-white"></i>
+        </a>
+    </li>
+    <li>
+        <a class="btn text-white" style="background: #ff5063" asp-action="Create" asp-controller="Posts" role="button">Publicar!</a>
+    </li>
+}
+else
+{
+    <li>
+        <a class="btn text-white" style="background: #ff5063" asp-area="Identity" asp-page="/Account/Login">Iniciar Sección</a>
+    </li>
+}
+</ul>

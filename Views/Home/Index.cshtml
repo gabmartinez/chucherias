@@ -1,0 +1,44 @@
+﻿@model IEnumerable<konoha.Models.Post>
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="row">
+    <div class="col-8"><h5>Articulos Recientes</h5></div>
+    <div class="col-4 text-right"><small class="text-muted">@ViewBag.Count artículos</small></div>
+</div>
+<hr class="mt-0 mb-4">
+<div class="row">
+    <div class="col-3">
+        <ul class="list-group">
+        @foreach (var category in ViewBag.Categories){
+            <li class="list-group-item"><i class="fas fa-tag pr-2"></i> @category.Name</li>
+        }
+        </ul>
+    </div>
+    <div class="col-9 card-columns">
+    @foreach (var item in Model) {
+        <div class="card text-center">
+            <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.PostID">
+            @if (@item.Images.Any())
+            {
+                <img class="card-img-top" src="~/images/posts/@item.Images[0].ImagePath" alt="@item.Title">    
+            } else
+            {
+                <img class="card-img-top" src="~/images/image_example.svg" alt="@item.Title">    
+            }
+            </a>
+            
+            <div class="card-body">
+                <a asp-controller="Posts" style="color: #ff5063" asp-action="Details" asp-route-id="@item.PostID">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                </a>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+            </div>
+            <div class="card-footer">
+                <h5 class="mb-0">RD$ @item.Price</h5>
+            </div>
+        </div>
+    }
+  </div>
+</div>

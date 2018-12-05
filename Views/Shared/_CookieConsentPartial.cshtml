@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <nav id="cookieConsent" class="navbar navbar-default navbar-fixed-top pt-4" role="alert">
+        <div class="container">
+            <div class="alert alert-info row w-100 mb-0" role="alert">
+                <p class="col-8 mb-0">Utilice este espacio para resumir su política de privacidad y uso de cookies.</p>
+                <div class="col-4 text-right">
+                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-sm btn-info navbar-btn">Más Info.</a>
+                    <button type="button" class="btn btn-default navbar-btn btn-sm" data-cookie-string="@cookieString">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        (function () {
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.querySelector("#cookieConsent").classList.add("hidden");
+            }, false);
+        })();
+    </script>
+}

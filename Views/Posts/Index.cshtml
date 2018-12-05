@@ -1,0 +1,41 @@
+﻿@model IEnumerable<konoha.Models.Post>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row m-1 p-3 border">
+    <div class="col-8">
+        <h4>Mis Artículos</h4>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-outline-info w-100" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Editar Cuenta</a>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-outline-secondary w-100" asp-area="Identity" asp-page="/Account/Logout" title="Cerrar Sección">Cerrar Sección</a>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12 card-columns">
+    @foreach (var item in Model) {
+        <a asp-action="Details" asp-route-id="@item.PostID">
+            <div class="card">
+                @if (@item.Images.Any())
+                {
+                    <img class="card-img-top" src="~/images/posts/@item.Images[0].ImagePath" alt="@item.Title">    
+                } else
+                {
+                    <img class="card-img-top" src="~/images/image_example.svg" alt="@item.Title">    
+                }
+                <div class="card-footer">
+                    <h5 class="card-title" style="color: #ff5063">@Html.DisplayFor(modelItem => item.Title)</h5>
+                </div>
+            </div>
+        </a>
+    }
+  </div>
+</div>
