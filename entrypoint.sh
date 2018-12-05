@@ -8,13 +8,8 @@ until dotnet ef database update; do
 sleep 1
 done
 
-until dotnet user-secrets set Authentication:Facebook:AppId $AppId; do
->&2 echo "Update AppId Facebook"
-sleep 1
-done
-
-until dotnet user-secrets set Authentication:Facebook:AppSecret $AppSecret do
->&2 echo "Update AppId Facebook"
+until dotnet user-secrets set Authentication:Facebook:AppId $AppId && dotnet user-secrets set Authentication:Facebook:AppSecret $AppSecret; do
+>&2 echo "Update secret keys Facebook"
 sleep 1
 done
 
