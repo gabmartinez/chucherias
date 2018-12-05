@@ -19,9 +19,14 @@ namespace konoha.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var applicationDbContext = _context.Post.Include(p => p.Category).Include(p => p.Images).OrderByDescending(p => p.CreatedDate);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                applicationDbContext = _context.Post.Where(p => p.Title.Contains(searchString)).Include(p => p.Category).Include(p => p.Images).OrderByDescending(p => p.CreatedDate);
+            }
+            
             ViewData["Categories"] = _context.Category;
             ViewData["Count"] = _context.Post.Count();
             return View(await applicationDbContext.ToListAsync());
