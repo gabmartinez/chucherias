@@ -27,7 +27,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-sm navbar-light py-3">
                 <div class="col-3"><a asp-area="" asp-controller="Home" asp-action="Index" class="text-white h4 w-25 mb-0"><i class="fas fa-shopping-cart"></i> Chucherias</a></div>
-                <div class="col-5">
+                <div class="col-4">
                     <form asp-controller="Home" asp-action="Index">
                         <div class="input-group">
                             <input type="text" name="SearchString" class="form-control" placeholder="Busqueda de Articulos">
@@ -36,6 +36,13 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="col-3">
+                    <ul class="nav navbar-nav navbar-right align-items-center w-100 justify-content-end">
+                        <li><a class="text-white pr-3" asp-action="Index" asp-controller="Home">Inicio</a></li>
+                        <li><a class="text-white pr-3" asp-action="About" asp-controller="Home">Acerca de</a></li>
+                        <li><a class="text-white" asp-action="Index" asp-controller="Categories">Categorias</a></li>
+                    </ul>
                 </div>
                 <partial name="_LoginPartial" />
             </nav>
