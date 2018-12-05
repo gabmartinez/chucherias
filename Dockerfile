@@ -1,16 +1,14 @@
-FROM microsoft/dotnet:sdk AS build-env
+FROM microsoft/aspnetcore-build:lts
+COPY . /app
 WORKDIR /app
+ARG AppId
+ENV AppId=$AppId
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
+ARG AppSecret
+ENV AppSecret=$AppSecret
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+RUN ["dotnet", "restore"]
+RUN ["dotnet", "build"]
+EXPOSE 80/tcp
+RUN chmod +x ./entrypoint.sh
+CMD /bin/bash ./entrypoint.sh
