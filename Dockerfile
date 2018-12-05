@@ -20,6 +20,7 @@ ARG AppSecret
 ENV AppSecret=$AppSecret
 
 COPY --from=build-env /app/out .
+COPY ./entrypoint.sh ./
 
 RUN chmod +x ./entrypoint.sh
 CMD /bin/bash ./entrypoint.sh
