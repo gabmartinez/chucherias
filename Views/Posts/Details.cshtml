@@ -8,24 +8,86 @@
     ViewData["Title"] = "Detalle Anuncio";
 }
 
+
+
+@{
+
+    int counter = 1;
+}
 <div class="row mb-4">
     <div class="col-6">
-    @foreach (var image in Model.Images) {    
-        <img src="~/images/posts/@image.ImagePath" alt="ASP.NET" class="img-thumbnail" />
-    }
+
+
+
+        <div class="row">
+
+            @foreach (var image in Model.Images)
+            {
+                @if (@counter == 1)
+                {
+                    <img src="~/images/posts/@image.ImagePath" onclick="openModal();currentSlide(@counter)" style="width:100%" class="img-fluid">
+                }
+                else
+                {
+
+                    <div class="column">
+
+                        <img src="~/images/posts/@image.ImagePath" alt="ASP.NET" onclick="openModal();currentSlide(@counter)" class="img-thumbnail" />
+
+                    </div>
+                }
+
+
+                counter = counter + 1;
+
+            }
+
+
+        </div>
+
+
+
+      
+            <div id="myModal" class="modal">
+                <span class="close cursor" onclick="closeModal()">&times;</span>
+
+                <div class="modal-content">
+
+                    @foreach (var image in Model.Images)
+                    {
+                        <div class="mySlides">
+                            <div class="numbertext">New Posts</div>
+                            <img src="~/images/posts/@image.ImagePath" >
+
+                        </div>
+
+                    }
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+                    <div class="caption-container">
+                        <p id="caption"></p>
+                    </div>
+
+                </div>
+        </div>
+
+
+
     </div>
     <div class="col-6">
         <div>
             <h2 class="mb-4">RD$ @Model.Price</h2>
             <h4 class="mb-3">@Html.DisplayFor(model => model.Title)</h4>
             <p>@Html.DisplayFor(model => model.Description)</p>
-            <hr/>
+            <hr />
             <p class="text-secondary">
                 <i class="fas fa-tag pr-2"></i> @Html.DisplayFor(model => model.Category.Name)
             </p>
         </div>
-        <hr/>
-            <small class="text-secondary"><i class="far fa-calendar"></i> @Html.DisplayFor(model => model.CreatedDate)</small>
+        <hr />
+        <small class="text-secondary"><i class="far fa-calendar"></i> @Html.DisplayFor(model => model.CreatedDate)</small>
         <div class="mt-5">
             <a class="btn text-white" style="background: #ff5063" role="button" asp-action="Edit" asp-route-id="@Model.PostID">Editar Anuncio</a>
             <a class="btn text-secondary" style="background: #efefef" role="button" data-toggle="modal" data-target="#deletePostModal">Borrar Anuncio</a>
@@ -34,44 +96,87 @@
 </div>
 
 <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deletePostLabel">Borrar anuncio</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ¿Estás seguro que quieres borrar este anuncio?
-      </div>
-      <div class="modal-footer">
-        <form asp-action="Delete" asp-route-id="@Model.PostID">
-            <input type="hidden" asp-for="PostID" />
-            <input class="btn btn-block btn-danger" type="submit" value="Borrar Anuncio" />
-        </form>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePostLabel">Borrar anuncio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro que quieres borrar este anuncio?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete" asp-route-id="@Model.PostID">
+                    <input type="hidden" asp-for="PostID" />
+                    <input class="btn btn-block btn-danger" type="submit" value="Borrar Anuncio" />
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+<script>
+    // Open the Modal
+    function openModal() {
+        document.getElementById('myModal').style.display = "block";
+    }
+
+    // Close the Modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+</script>
 
 @if (SignInManager.IsSignedIn(User))
 {
-<div id="fb-root"></div>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
-<!-- Comment button and Share-->
+    <!-- Comment button and Share-->
 
-<div class="fb-like" data-href="https://localhost:44375" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+    <div class="fb-like" data-href="https://localhost:44375" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 
-<!-- Comment-->
+    <!-- Comment-->
 
-<div class="fb-comments" data-width="700 data-href="https://localhost:44375" data-numposts="5"></div>
+    <div class="fb-comments" data-width="700" data-href="https://localhost:44375" data-numposts="5"></div>
 }
