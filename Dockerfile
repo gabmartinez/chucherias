@@ -1,17 +1,8 @@
-FROM microsoft/dotnet:sdk AS build-env
+FROM microsoft/aspnetcore-build:lts
+COPY . /app
 WORKDIR /app
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
-WORKDIR /app
+RUN ["dotnet", "restore"]
+RUN ["dotnet", "build"]
 
 ARG AppId
 ENV AppId=$AppId
@@ -19,9 +10,6 @@ ENV AppId=$AppId
 ARG AppSecret
 ENV AppSecret=$AppSecret
 
-COPY --from=build-env /app/out .
-COPY ./entrypoint.sh ./
-
+EXPOSE 80/tcp
 RUN chmod +x ./entrypoint.sh
 CMD /bin/bash ./entrypoint.sh
-# ENTRYPOINT ["dotnet", "konoha.dll"]
