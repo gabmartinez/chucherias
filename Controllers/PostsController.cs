@@ -142,7 +142,7 @@ namespace konoha.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = id });
             }
             ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "Name", post.CategoryID);
             return View(post);

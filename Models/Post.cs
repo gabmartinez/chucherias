@@ -13,22 +13,22 @@ namespace konoha.Models
         [Key]
         public int PostID { get; set; }
 
-        [Display(Name="Tittulo")]
-        [Required(ErrorMessage = "You must enter a {0}")]
-        [StringLength(45, ErrorMessage = "The field {0} can contain maximun {1} and minimun {2} chracters")]
+        [Display(Name="Titulo")]
+        [Required(ErrorMessage = "Debe digitar el {0}")]
+        [StringLength(100, ErrorMessage = "El campo {0} debe contener máximo {1} y mínimo {2} caratecter")]
         public String Title { get; set; }
         
         [StringLength(450)]
         public String UserID { get; set; }
 
         [Display(Name="Categoria")]
-        [Required(ErrorMessage = "You must enter a {0}")]
+        [Required(ErrorMessage = "Debe digitar el {0}")]
         public int CategoryID { get; set; }
 
         public Category Category { get; set; }
 
         [Display(Name="Descripción")]
-        [StringLength(100, ErrorMessage = "The field {0} can contain maximun {1} and minimun {2} chracters")]
+        [StringLength(250, ErrorMessage = "El campo {0} debe contener máximo {1} y mínimo {2} caratecter")]
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
@@ -43,7 +43,7 @@ namespace konoha.Models
         [Column(TypeName = "decimal(12, 2)")]
         public decimal Price { get; set; }
         
-        // [MaxLength(3)]
+        [Display(Name="Imagenes")]
         public List<PostImage> Images { get; set; }
     }
 }
