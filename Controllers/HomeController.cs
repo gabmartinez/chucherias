@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using konoha.Models;
+using konoha.Data;
 
 namespace konoha.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context) {
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var applicationDbContext = _context.Post.Include(p => p.Category).Include(p => p.Images).OrderByDescending(p => p.CreatedDate);
+            ViewData["Categories"] = _context.Category;
+            ViewData["Count"] = _context.Post.Count();
+            return View(await applicationDbContext.ToListAsync());
         }
 
         public IActionResult About()
