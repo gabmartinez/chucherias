@@ -22,27 +22,20 @@
 <div class="row mt-5">
     <div class="col-12 card-columns">
     @foreach (var item in Model) {
-        <div class="card">
-            <a asp-action="Details" asp-route-id="@item.PostID">
-            @if (@item.Images.Any())
-            {
-                <img class="card-img-top" src="~/images/posts/@item.Images[0].ImagePath" alt="@item.Title">    
-            } else
-            {
-                <img class="card-img-top" src="~/images/image_example.svg" alt="@item.Title">    
-            }
-            </a>
-            
-            <div class="card-body">
-                <a asp-action="Details" asp-route-id="@item.PostID">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-                </a>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+        <a asp-action="Details" asp-route-id="@item.PostID">
+            <div class="card">
+                @if (@item.Images.Any())
+                {
+                    <img class="card-img-top" src="~/images/posts/@item.Images[0].ImagePath" alt="@item.Title">    
+                } else
+                {
+                    <img class="card-img-top" src="~/images/image_example.svg" alt="@item.Title">    
+                }
+                <div class="card-footer">
+                    <h5 class="card-title" style="color: #ff5063">@Html.DisplayFor(modelItem => item.Title)</h5>
+                </div>
             </div>
-            <div class="card-footer">
-                <h5 class="text-right mb-0">RD$ @item.Price</h5>
-            </div>
-        </div>
+        </a>
     }
   </div>
 </div>

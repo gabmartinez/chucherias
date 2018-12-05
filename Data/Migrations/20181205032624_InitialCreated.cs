@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace konoha.Migrations
 {
-    public partial class AddModels : Migration
+    public partial class InitialCreated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,8 +108,8 @@ namespace konoha.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -153,8 +153,8 @@ namespace konoha.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -174,12 +174,13 @@ namespace konoha.Migrations
                 {
                     PostID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(maxLength: 45, nullable: false),
-                    UserID = table.Column<string>(maxLength: 450, nullable: false),
+                    Title = table.Column<string>(maxLength: 100, nullable: false),
+                    UserID = table.Column<string>(maxLength: 450, nullable: true),
                     CategoryID = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(maxLength: 100, nullable: true),
+                    Description = table.Column<string>(maxLength: 250, nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
-                    IsAcctive = table.Column<bool>(nullable: false)
+                    IsAcctive = table.Column<bool>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(12, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
