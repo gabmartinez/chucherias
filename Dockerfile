@@ -20,6 +20,7 @@ ARG AppSecret
 ENV AppSecret=$AppSecret
 
 COPY --from=build-env /app/out .
-RUN dotnet user-secrets set Authentication:Facebook:AppId $AppId
-RUN dotnet user-secrets set Authentication:Facebook:AppSecret $AppSecret
-ENTRYPOINT ["dotnet", "konoha.dll"]
+
+RUN chmod +x ./entrypoint.sh
+CMD /bin/bash ./entrypoint.sh
+# ENTRYPOINT ["dotnet", "konoha.dll"]
