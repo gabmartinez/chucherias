@@ -25,11 +25,14 @@
             </p>
         </div>
         <hr/>
-            <small class="text-secondary"><i class="far fa-calendar"></i> @Html.DisplayFor(model => model.CreatedDate)</small>
+        <small class="text-secondary"><i class="far fa-calendar"></i> @Html.DisplayFor(model => model.CreatedDate)</small>
+@if (SignInManager.IsSignedIn(User))
+{
         <div class="mt-5">
             <a class="btn text-white" style="background: #ff5063" role="button" asp-action="Edit" asp-route-id="@Model.PostID">Editar Anuncio</a>
             <a class="btn text-secondary" style="background: #efefef" role="button" data-toggle="modal" data-target="#deletePostModal">Borrar Anuncio</a>
         </div>
+}
     </div>
 </div>
 
