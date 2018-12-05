@@ -10,8 +10,8 @@ using konoha.Data;
 namespace konoha.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181203160845_AddModels")]
-    partial class AddModels
+    [Migration("20181205032624_InitialCreated")]
+    partial class InitialCreated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,16 +53,18 @@ namespace konoha.Migrations
                     b.Property<DateTime?>("CreatedDate");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(100);
+                        .HasMaxLength(250);
 
                     b.Property<bool>("IsAcctive");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(12, 2)");
+
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(45);
+                        .HasMaxLength(100);
 
                     b.Property<string>("UserID")
-                        .IsRequired()
                         .HasMaxLength(450);
 
                     b.HasKey("PostID");
@@ -206,11 +208,9 @@ namespace konoha.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -241,11 +241,9 @@ namespace konoha.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 

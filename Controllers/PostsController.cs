@@ -12,9 +12,11 @@ using konoha.Models;
 using konoha.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace konoha.Controllers
 {
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -40,6 +42,7 @@ namespace konoha.Controllers
         }
 
         // GET: Posts/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
