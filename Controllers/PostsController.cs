@@ -35,7 +35,7 @@ namespace konoha.Controllers
             if(!User.Identity.IsAuthenticated) {
                 return RedirectToAction("Login", "Account");
             }
-            var applicationDbContext = _context.Post.Include(p => p.Category);
+            var applicationDbContext = _context.Post.Include(p => p.Category).Include(p => p.Images).OrderByDescending(p => p.CreatedDate);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -70,7 +70,7 @@ namespace konoha.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostID,Title,CategoryID,Description,IsAcctive")] Post post)
+        public async Task<IActionResult> Create([Bind("PostID,Title,CategoryID,Description,Price")] Post post)
         {
             if (ModelState.IsValid)
             {   
@@ -78,6 +78,7 @@ namespace konoha.Controllers
                 if(files.Any()) {
                     post.Images = await PrepareImages(files);
                 }
+                post.IsAcctive = true;
                 post.CreatedDate = DateTime.Now;
                 post.UserID = _userManager.GetUserId(User);
                 _context.Add(post);

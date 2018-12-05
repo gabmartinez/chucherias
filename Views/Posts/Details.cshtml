@@ -8,51 +8,45 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAcctive)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsAcctive)
-        </dd>
-    </dl>
-</div>
-
-@foreach (var image in Model.Images) {    
-    <img src="~/images/posts/@image.ImagePath" alt="ASP.NET" class="img-responsive" />
-}
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PostID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="row mb-4">
+    <div class="col-6">
+    @foreach (var image in Model.Images) {    
+        <img src="~/images/posts/@image.ImagePath" alt="ASP.NET" class="img-thumbnail" />
+    }
+    </div>
+    <div class="col-6">
+        <h2>RD$ @Model.Price</h2>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+        </dl>
+        <div>
+            <a class="btn text-white" style="background: #ff5063" role="button" asp-action="Edit" asp-route-id="@Model.PostID">Editar Anuncio</a>
+            <a class="btn text-secondary" style="background: #efefef" role="button" asp-action="Delete" asp-route-id="@Model.PostID">Borrar Anuncio</a>
+        </div>
+    </div>
 </div>
 
 @if (SignInManager.IsSignedIn(User))

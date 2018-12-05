@@ -13,6 +13,7 @@ namespace konoha.Models
         [Key]
         public int PostID { get; set; }
 
+        [Display(Name="Tittulo")]
         [Required(ErrorMessage = "You must enter a {0}")]
         [StringLength(45, ErrorMessage = "The field {0} can contain maximun {1} and minimun {2} chracters")]
         public String Title { get; set; }
@@ -20,11 +21,13 @@ namespace konoha.Models
         [StringLength(450)]
         public String UserID { get; set; }
 
+        [Display(Name="Categoria")]
         [Required(ErrorMessage = "You must enter a {0}")]
         public int CategoryID { get; set; }
 
         public Category Category { get; set; }
 
+        [Display(Name="Descripción")]
         [StringLength(100, ErrorMessage = "The field {0} can contain maximun {1} and minimun {2} chracters")]
         public string Description { get; set; }
 
@@ -34,6 +37,11 @@ namespace konoha.Models
 
         [Display(Name = "Is active")]
         public bool IsAcctive { get; set; }
+
+        [Display(Name="Precio")]
+        [Required]
+        [Column(TypeName = "decimal(12, 2)")]
+        public decimal Price { get; set; }
         
         // [MaxLength(3)]
         public List<PostImage> Images { get; set; }
