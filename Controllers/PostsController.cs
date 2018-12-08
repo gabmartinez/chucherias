@@ -13,6 +13,8 @@ using konoha.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using konoha.Interface;
+using konoha.PostList;
 
 namespace konoha.Controllers
 {
@@ -22,12 +24,59 @@ namespace konoha.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IHostingEnvironment _environment;
+        Category n = new Category();
+   
 
         public PostsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IHostingEnvironment env)
         {
             _context = context;
             _userManager = userManager;
             _environment = env;
+           
+        }
+
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly PostsRepository _postsRepository;
+        public PostsController(ICategoryRepository categoryRepository, PostsRepository postsRepository)
+        {
+            _categoryRepository = categoryRepository;
+            _postsRepository = postsRepository;
+        }
+
+        public ViewResult List(string category)
+        {
+            string _category = category;
+            IEnumerable<Post> posts;
+
+            string currentCategory = string.Empty;
+
+            if (string.IsNullOrEmpty(category))
+            {
+                posts = _postsRepository.Post.OrderBy(n => n.PostID);
+                currentCategory = "All-Post";
+            }
+            else
+            {
+                if (string.Equals(n.Name, _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    posts = _postsRepository.Post.Where(p => p.Category.Name.Equals("Videojuegos")).OrderBy(p => p.Category.Name);
+
+                    currentCategory = _category;
+
+                }
+            }
+
+           
+
+            var postlistViewModel = new PostListViewModel
+            {
+                Post = posts,
+                CurrentCategory = currentCategory
+
+            };
+
+            return View(postlistViewModel);
+        
         }
 
         // GET: Posts

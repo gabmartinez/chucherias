@@ -15,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.HttpOverrides;
+using konoha.Interface;
+using konoha.Mocks;
 
 namespace konoha
 {
@@ -30,6 +32,7 @@ namespace konoha
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+          
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -58,6 +61,10 @@ namespace konoha
 
             // services.AddSingleton<IEmailSender, EmailSender>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<PostsRepository, MockPostRepository>();
+            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +94,9 @@ namespace konoha
 
             app.UseMvc(routes =>
             {
+            routes.MapRoute(name: "CategoryFilter", template: "Post/{action}/{category}");
+
+            
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

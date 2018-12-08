@@ -23,5 +23,7 @@ namespace konoha.Models
         [StringLength(200, MinimumLength = 3, ErrorMessage ="Dedes ingresar menos de 3 a 200 caracteres")]
         public string Desciption { get; set; }
 
+        public List<Post> Posts { get; set; }
+
     }
 }

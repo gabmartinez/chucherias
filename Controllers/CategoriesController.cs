@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using konoha.Models;
 using konoha.Data;
 using Microsoft.AspNetCore.Authorization;
+using konoha.Interface;
 
 namespace konoha.Controllers
 {
@@ -15,7 +16,7 @@ namespace konoha.Controllers
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+ 
         public CategoriesController(ApplicationDbContext context)
         {
             _context = context;

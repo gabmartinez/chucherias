@@ -25,7 +25,9 @@ namespace konoha.Models
         [Required(ErrorMessage = "Debe digitar el {0}")]
         public int CategoryID { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
+
+        public bool IsPreferredPost { get; set; }
 
         [Display(Name="Descripción")]
         [StringLength(250, ErrorMessage = "El campo {0} debe contener máximo {1} y mínimo {2} caratecter")]
@@ -45,5 +47,7 @@ namespace konoha.Models
         
         [Display(Name="Imagenes")]
         public List<PostImage> Images { get; set; }
+
+      
     }
 }
