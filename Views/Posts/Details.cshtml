@@ -8,75 +8,56 @@
     ViewData["Title"] = "Detalle Anuncio";
 }
 
-
-
 @{
-
     int counter = 1;
 }
 <div class="row mb-4">
-    <div class="col-6">
-
-
-
-        <div class="row">
-
+    <div class="col-5">
+        <div class="row justify-content-center align-items-center">
             @foreach (var image in Model.Images)
             {
-                @if (@counter == 1)
-                {
-                    <img src="~/images/posts/@image.ImagePath" onclick="openModal();currentSlide(@counter)" style="width:100%" class="img-fluid">
+                @if (@counter == 1){
+                    <div class="col-12 text-center">
+                        <img src="~/images/posts/@image.ImagePath" onclick="openModal();currentSlide(@counter)" class="img-fluid mb-3" style="max-height: 350px;" />
+                    </div>
                 }
                 else
                 {
+                    <div class="col-2 pr-0">
+                        <img src="~/images/posts/@image.ImagePath" onclick="openModal();currentSlide(@counter)" class="img-thumbnail pr-0" />
+                    </div>
+                }
+                counter = counter + 1;
+            }
+        @if (Model.Images.Count > 0){
+            <div class="card-group">
+            @for (int i = 0; i < Model.Images.Count; i++)
+            {
+            } 
+            </div>
+        }
+        </div>
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
 
-                    <div class="column">
-
-                        <img src="~/images/posts/@image.ImagePath" alt="ASP.NET" onclick="openModal();currentSlide(@counter)" class="img-thumbnail" />
+                @foreach (var image in Model.Images)
+                {
+                    <div class="mySlides">
+                        <div class="numbertext">New Posts</div>
+                        <img src="~/images/posts/@image.ImagePath" style="width:100%;" >
 
                     </div>
                 }
-
-
-                counter = counter + 1;
-
-            }
-
-
-        </div>
-
-
-
-      
-            <div id="myModal" class="modal">
-                <span class="close cursor" onclick="closeModal()">&times;</span>
-
-                <div class="modal-content">
-
-                    @foreach (var image in Model.Images)
-                    {
-                        <div class="mySlides">
-                            <div class="numbertext">New Posts</div>
-                            <img src="~/images/posts/@image.ImagePath" style="width:100%;" >
-
-                        </div>
-
-                    }
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-
-                    <div class="caption-container">
-                        <p id="caption"></p>
-                    </div>
-
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="caption-container">
+                    <p id="caption"></p>
                 </div>
+            </div>
         </div>
-
-
-
     </div>
-    <div class="col-6">
+    <div class="col-7">
         <div>
             <h2 class="mb-4">RD$ @Model.Price</h2>
             <h4 class="mb-3">@Html.DisplayFor(model => model.Title)</h4>
@@ -89,13 +70,13 @@
 
         <hr/>
         <small class="text-secondary"><i class="far fa-calendar"></i> @Html.DisplayFor(model => model.CreatedDate)</small>
-@if (SignInManager.IsSignedIn(User))
-{
+    @if (SignInManager.IsSignedIn(User))
+    {
         <div class="mt-5">
             <a class="btn text-white" style="background: #ff5063" role="button" asp-action="Edit" asp-route-id="@Model.PostID">Editar Anuncio</a>
             <a class="btn text-secondary" style="background: #efefef" role="button" data-toggle="modal" data-target="#deletePostModal">Borrar Anuncio</a>
         </div>
-}
+    }
     </div>
 </div>
 
@@ -133,7 +114,6 @@
     }
 
     var slideIndex = 1;
-    showSlides(slideIndex);
 
     // Next/previous controls
     function plusSlides(n) {
