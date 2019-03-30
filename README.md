@@ -1,6 +1,6 @@
-﻿# konoha
+﻿# Chucherias
 
-Proyecto Final de Programación 3 utilizando Asp .Net
+e-commerce website using asp.net core
 
 ## Initial Migration
 
@@ -29,7 +29,7 @@ docker pull microsoft/mssql-server-linux
 docker run --name mssql-server -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=<Password>' -e 'MSSQL_PID=Express' -p 127.0.0.1:1433:1433 -d microsoft/mssql-server-linux:latest
 ```
 
-## Developer Env
+## Run as development environment
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development && dotnet run

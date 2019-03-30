@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using konoha.Models;
+using chucherias.Models;
 
-namespace konoha.Data
+namespace chucherias.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

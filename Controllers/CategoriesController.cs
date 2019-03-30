@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using konoha.Models;
-using konoha.Data;
+using chucherias.Models;
+using chucherias.Data;
 using Microsoft.AspNetCore.Authorization;
 
-namespace konoha.Controllers
+namespace chucherias.Controllers
 {
     [Authorize]
     public class CategoriesController : Controller

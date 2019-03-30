@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace konoha.Migrations
+namespace chucherias.Migrations
 {
     public partial class InitialCreated : Migration
     {

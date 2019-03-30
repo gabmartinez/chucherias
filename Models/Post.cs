@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace konoha.Models
+namespace chucherias.Models
 {
     public class Post
     {
