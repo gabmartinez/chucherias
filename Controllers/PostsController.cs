@@ -190,16 +190,12 @@ namespace konoha.Controllers
             List<PostImage> images = new List<PostImage>();
             foreach (var Image in files)
             {
-                Console.WriteLine("Here we are!");
                 if (Image != null && Image.Length > 0)
                 {
                     var file = Image;
-                    Console.WriteLine("Here we are 1");
                     var uploads = Path.Combine(_environment.WebRootPath, "images/posts");
-                    Console.WriteLine("Here we are 2");
                     if (file.Length > 0)
                     {
-                        Console.WriteLine("Here we are 3");
                         var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
 
                         System.Console.WriteLine(fileName);
