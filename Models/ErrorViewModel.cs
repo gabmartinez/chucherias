@@ -1,6 +1,6 @@
 using System;
 
-namespace konoha.Models
+namespace chucherias.Models
 {
     public class ErrorViewModel
     {

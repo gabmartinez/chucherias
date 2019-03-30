@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using konoha.Models;
-using konoha.Data;
+using chucherias.Models;
+using chucherias.Data;
 
-namespace konoha.Controllers
+namespace chucherias.Controllers
 {
     public class HomeController : Controller
     {

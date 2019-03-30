@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using konoha.Data;
+using chucherias.Data;
 
-namespace konoha.Migrations
+namespace chucherias.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20181205032624_InitialCreated")]
@@ -21,7 +21,7 @@ namespace konoha.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("konoha.Models.Category", b =>
+            modelBuilder.Entity("chucherias.Models.Category", b =>
                 {
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace konoha.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("konoha.Models.Post", b =>
+            modelBuilder.Entity("chucherias.Models.Post", b =>
                 {
                     b.Property<int>("PostID")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace konoha.Migrations
                     b.ToTable("Post");
                 });
 
-            modelBuilder.Entity("konoha.Models.PostImage", b =>
+            modelBuilder.Entity("chucherias.Models.PostImage", b =>
                 {
                     b.Property<int>("PostImageID")
                         .ValueGeneratedOnAdd()
@@ -252,17 +252,17 @@ namespace konoha.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("konoha.Models.Post", b =>
+            modelBuilder.Entity("chucherias.Models.Post", b =>
                 {
-                    b.HasOne("konoha.Models.Category", "Category")
+                    b.HasOne("chucherias.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("konoha.Models.PostImage", b =>
+            modelBuilder.Entity("chucherias.Models.PostImage", b =>
                 {
-                    b.HasOne("konoha.Models.Post")
+                    b.HasOne("chucherias.Models.Post")
                         .WithMany("Images")
                         .HasForeignKey("PostID");
                 });
