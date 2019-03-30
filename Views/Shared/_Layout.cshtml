@@ -37,13 +37,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-3">
-                    <ul class="nav navbar-nav navbar-right align-items-center w-100 justify-content-end">
-                        <li><a class="text-white pr-3" asp-action="Index" asp-controller="Home">Inicio</a></li>
-                        <li><a class="text-white pr-3" asp-action="About" asp-controller="Home">Acerca de</a></li>
-                        <li><a class="text-white" asp-action="Index" asp-controller="Categories">Categorias</a></li>
-                    </ul>
-                </div>
+                <partial name="_TopMenuPartial" />
                 <partial name="_LoginPartial" />
             </nav>
         </div>
