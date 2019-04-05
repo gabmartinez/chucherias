@@ -175,7 +175,9 @@ namespace chucherias.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Post.Include(p => p.Images).FirstOrDefaultAsync(p => p.PostID == id);
+            foreach (var image in post.Images.ToList())
+                _context.PostImage.Remove(image);
             _context.Post.Remove(post);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
