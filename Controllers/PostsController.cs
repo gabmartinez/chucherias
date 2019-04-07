@@ -33,7 +33,6 @@ namespace chucherias.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            Console.WriteLine(nameof(Index));
             if(!User.Identity.IsAuthenticated) {
                 return RedirectToAction("Login", "Account");
             }
