@@ -13,7 +13,7 @@ namespace chucherias.Models
         [Key]
         public int PostID { get; set; }
 
-        [Display(Name="Titulo")]
+        [Display(Name="Title")]
         [Required(ErrorMessage = "Debe digitar el {0}")]
         [StringLength(100, ErrorMessage = "El campo {0} debe contener máximo {1} y mínimo {2} caratecter")]
         public String Title { get; set; }
@@ -21,13 +21,13 @@ namespace chucherias.Models
         [StringLength(450)]
         public String UserID { get; set; }
 
-        [Display(Name="Categoria")]
+        [Display(Name="Category")]
         [Required(ErrorMessage = "Debe digitar el {0}")]
         public int CategoryID { get; set; }
 
         public Category Category { get; set; }
 
-        [Display(Name="Descripción")]
+        [Display(Name="Description")]
         [StringLength(250, ErrorMessage = "El campo {0} debe contener máximo {1} y mínimo {2} caratecter")]
         public string Description { get; set; }
 
@@ -38,12 +38,12 @@ namespace chucherias.Models
         [Display(Name = "Is active")]
         public bool IsAcctive { get; set; }
 
-        [Display(Name="Precio")]
+        [Display(Name="Price")]
         [Required]
         [Column(TypeName = "decimal(12, 2)")]
         public decimal Price { get; set; }
         
-        [Display(Name="Imagenes")]
+        [Display(Name="Images")]
         public List<PostImage> Images { get; set; }
     }
 }

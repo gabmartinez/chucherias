@@ -7,18 +7,18 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li>
-        <a asp-action="Index" asp-controller="Posts" title="Mi Cuenta">
+        <a asp-action="Index" asp-controller="Posts" title="My Account">
             <i class="fas fa-user-circle h2 mb-0 mr-4 text-white"></i>
         </a>
     </li>
     <li>
-        <a class="btn text-white" style="background: #ff5063" asp-action="Create" asp-controller="Posts" role="button">Publicar!</a>
+        <a class="btn text-white" style="background: #ff5063" asp-action="Create" asp-controller="Posts" role="button">Create</a>
     </li>
 }
 else
 {
     <li>
-        <a class="btn text-white" style="background: #ff5063" asp-area="Identity" asp-page="/Account/Login">Iniciar Sección</a>
+        <a class="btn text-white" style="background: #ff5063" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
 </ul>
