@@ -32,6 +32,15 @@ namespace chucherias.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Filters(int? id)
+        {
+            var applicationDbContext = _context.Post.Include(p => p.Category).Include(p => p.Images).Where(p => p.CategoryID == id).OrderByDescending(p => p.CreatedDate);
+            
+            ViewData["Categories"] = _context.Category;
+            ViewData["Count"] = _context.Post.Where(p => p.CategoryID == id).Count();
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
