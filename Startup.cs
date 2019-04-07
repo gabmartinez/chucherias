@@ -38,7 +38,7 @@ namespace chucherias
             });
 
             services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
             
             services.AddDefaultIdentity<IdentityUser>()
