@@ -481,5 +481,4 @@ ASALocalRun/
 appsettings.Development.json
 .vscode
 wwwroot/images/posts
-*.db
 .env
