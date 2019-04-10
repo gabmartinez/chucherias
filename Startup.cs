@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.Extensions;
 using chucherias.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +39,7 @@ namespace chucherias
             });
 
             services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"))
             );
             
             services.AddDefaultIdentity<IdentityUser>()
@@ -51,12 +52,6 @@ namespace chucherias
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
 
-            services.Configure<ForwardedHeadersOptions>(options =>
-            {
-                options.KnownProxies.Add(IPAddress.Parse("159.203.120.109"));
-            });
-
-            // services.AddSingleton<IEmailSender, EmailSender>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
