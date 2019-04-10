@@ -1,0 +1,11 @@
+# Optional file for deploying to Google App Engine Flexible Environment.
+runtime: aspnetcore
+env: flex
+service: chucheria
+
+env_variables:
+  SiteName: Chucherias
+  Logging__LogLevel__Default: Warning
+  ConnectionStrings__DefaultConnection: "server=localhost;database=library;user=user;password=password"
+  Authentication__Facebook__AppId: "AppId"
+  Authentication__Facebook__AppSecret: "AppSecret"
