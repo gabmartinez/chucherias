@@ -80,7 +80,7 @@ namespace chucherias.Controllers
                 if(files.Any()) {
                     post.Images = await PrepareImages(files);
                 }
-                post.IsAcctive = true;
+                post.IsActive = true;
                 post.CreatedDate = DateTime.Now;
                 post.UserID = _userManager.GetUserId(User);
                 _context.Add(post);
