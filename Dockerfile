@@ -1,14 +1,15 @@
-FROM microsoft/aspnetcore-build:lts
-COPY . /app
+FROM mcr.microsoft.com/dotnet/core/sdk AS build
 WORKDIR /app
-ARG AppId
-ENV AppId=$AppId
 
-ARG AppSecret
-ENV AppSecret=$AppSecret
+# copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
 
-RUN ["dotnet", "restore"]
-RUN ["dotnet", "build"]
-EXPOSE 80/tcp
-RUN chmod +x ./entrypoint.sh
-CMD /bin/bash ./entrypoint.sh
+# copy everything else and build app
+COPY ./ ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/core/aspnet AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+ENTRYPOINT ["dotnet", "chucherias.dll"]
