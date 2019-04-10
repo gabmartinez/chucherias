@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace chucherias.Migrations
@@ -31,15 +30,15 @@ namespace chucherias.Migrations
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    EmailConfirmed = table.Column<short>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    PhoneNumberConfirmed = table.Column<short>(nullable: false),
+                    TwoFactorEnabled = table.Column<short>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<short>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -52,10 +51,10 @@ namespace chucherias.Migrations
                 columns: table => new
                 {
                     CategoryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     Name = table.Column<string>(maxLength: 40, nullable: false),
                     Acronym = table.Column<string>(maxLength: 20, nullable: true),
-                    Desciption = table.Column<string>(maxLength: 200, nullable: true)
+                    Description = table.Column<string>(maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,7 +66,7 @@ namespace chucherias.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -88,7 +87,7 @@ namespace chucherias.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -108,8 +107,8 @@ namespace chucherias.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -153,8 +152,8 @@ namespace chucherias.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -173,13 +172,13 @@ namespace chucherias.Migrations
                 columns: table => new
                 {
                     PostID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     Title = table.Column<string>(maxLength: 100, nullable: false),
                     UserID = table.Column<string>(maxLength: 450, nullable: true),
                     CategoryID = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 250, nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
-                    IsAcctive = table.Column<bool>(nullable: false),
+                    IsActive = table.Column<short>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(12, 2)", nullable: false)
                 },
                 constraints: table =>
@@ -198,7 +197,7 @@ namespace chucherias.Migrations
                 columns: table => new
                 {
                     PostImageID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySQL:AutoIncrement", true),
                     ImagePath = table.Column<string>(nullable: true),
                     PostID = table.Column<int>(nullable: true)
                 },
@@ -222,8 +221,7 @@ namespace chucherias.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -249,8 +247,7 @@ namespace chucherias.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_CategoryID",
