@@ -8,6 +8,7 @@ namespace chucherias.Models
 {
     public class Category
     {
+        [Key]
         public int CategoryID { get; set; }
 
         [Display(Name="Name")]
@@ -21,7 +22,7 @@ namespace chucherias.Models
 
         [Display(Name="Description")]
         [StringLength(200, MinimumLength = 3, ErrorMessage ="Dedes ingresar menos de 3 a 200 caracteres")]
-        public string Desciption { get; set; }
+        public string Description { get; set; }
 
     }
 }
