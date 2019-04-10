@@ -36,7 +36,7 @@ namespace chucherias.Models
         public DateTime? CreatedDate { get; set; }
 
         [Display(Name = "Is active")]
-        public bool IsAcctive { get; set; }
+        public bool IsActive { get; set; }
 
         [Display(Name="Price")]
         [Required]
